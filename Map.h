@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 class Map {
 public:
@@ -9,10 +10,15 @@ public:
     ~Map();
 
     // Return char at Map Position
-    char position(int x, int y);
+    char getValue(int x, int y);
 
     // Edit Map Position
-    void position(int x, int y, char value);
+    void setValue(int x, int y, char value);
+    void pushColumn(int y, char value);
+    void addRow();
+
+    // Print
+    std::string toString();
 
 private:
     // grid holds the map values
