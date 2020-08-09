@@ -9,9 +9,10 @@ void printMap(Map* map);
 
 int main() {
     // Read in Map from file
-    Map* map = readMap("test/10x10-01.map");
+    Map* map = readMap("test/4x4-01.map");
 
     // solve map with euclidean
+    pathfind(map);
 
     // print map
     printMap(map);

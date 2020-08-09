@@ -25,6 +25,17 @@ void Map::addRow() {
     grid.push_back(row);
 }
 
+Coords* Map::locateChar(char c) {
+    for(int i = 0; i < grid.size(); ++i) {
+        for(int j = 0; j < grid.at(i).size(); ++j) {
+            if(grid.at(i).at(j) == c) {
+                return new Coords(j, i);
+            }
+        }
+    }
+    return new Coords(-1, -1);
+}
+
 std::string Map::toString() {
     std::string out = "";
 
