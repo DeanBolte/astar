@@ -22,6 +22,6 @@ bool path(Map* map, Coords* start, Coords* end, std::vector<Coords*> stack) {
         return true;
     }
 
-    
+
 
 }
