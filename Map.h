@@ -11,6 +11,10 @@ struct Coords {
         this->x = x;
         this->y = y;
     }
+
+    bool operator==(const Coords& coords) {
+        return (x == coords.x && y == coords.y);
+    }
 };
 
 class Map {
@@ -20,18 +24,22 @@ public:
     ~Map();
 
     // Return char at Map Position
-    char getValue(int x, int y);
+    char getValue(Coords* coords);
 
     // Locate the first occurence of a specific char in a Map
     // Returns a coord of -1, -1 if the char doesnt exist
     Coords* locateChar(char c);
 
     // Edit Map Position
-    void setValue(int x, int y, char value);
+    void setValue(Coords* coords, char value);
+    
+    // Push to the end of a row
     void pushColumn(int y, char value);
+
+    // Add a row to the Map
     void addRow();
 
-    // Print
+    // Build a formatted string of the Map
     std::string toString();
 
 private:

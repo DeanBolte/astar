@@ -1,10 +1,25 @@
 #include "Euclidean.h"
-#include <math.h>
 
-void pathfind(Map* map) {
-    
+bool pathfind(Map* map) {
+    // First Node
+    Coords* start = map->locateChar('S');
+    // Final Node
+    Coords* end = map->locateChar('E');
+
+    // Stack of Nodes
+    std::vector<Coords*> stack;
+
+    // Recursive find end
+    return path(map, start, end, stack);
 }
 
-float distanceToEnd(Coords* start, Coords* end) {
+float distance(Coords* start, Coords* end) {
     return sqrt(pow(end->x - start->x, 2) + pow(end->y - start->y, 2));
+}
+
+bool path(Map* map, Coords* start, Coords* end, std::vector<Coords*> stack) {
+    if(*start == *end) {
+
+    }
+
 }

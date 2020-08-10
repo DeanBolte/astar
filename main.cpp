@@ -10,11 +10,15 @@ void printMap(Map* map);
 int main() {
     // Read in Map from file
     Map* map = readMap("test/4x4-01.map");
+    // Print map after reading in
+    std::cout << "Map from file:" << std::endl;
+    printMap(map);
 
     // solve map with euclidean
     pathfind(map);
 
     // print map
+    std::cout << std::endl << "Map after pathfind():" << std::endl;
     printMap(map);
 }
 

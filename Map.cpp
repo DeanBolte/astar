@@ -8,12 +8,12 @@ Map::~Map() {
 
 }
 
-char Map::getValue(int x, int y) {
-    return grid.at(y).at(x);
+char Map::getValue(Coords* coords) {
+    return grid.at(coords->y).at(coords->x);
 }
 
-void Map::setValue(int x, int y, char value) {
-    grid.at(y).at(x) = value;
+void Map::setValue(Coords* coords, char value) {
+    grid.at(coords->y).at(coords->x) = value;
 }
 
 void Map::pushColumn(int y, char value) {
@@ -26,8 +26,8 @@ void Map::addRow() {
 }
 
 Coords* Map::locateChar(char c) {
-    for(int i = 0; i < grid.size(); ++i) {
-        for(int j = 0; j < grid.at(i).size(); ++j) {
+    for(unsigned int i = 0; i < grid.size(); ++i) {
+        for(unsigned int j = 0; j < grid.at(i).size(); ++j) {
             if(grid.at(i).at(j) == c) {
                 return new Coords(j, i);
             }
