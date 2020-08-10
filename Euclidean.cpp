@@ -19,7 +19,9 @@ float distance(Coords* start, Coords* end) {
 
 bool path(Map* map, Coords* start, Coords* end, std::vector<Coords*> stack) {
     if(*start == *end) {
-
+        return true;
     }
+
+    
 
 }
