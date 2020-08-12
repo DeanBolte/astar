@@ -25,6 +25,11 @@ public:
 
     // Return char at Map Position
     char getValue(Coords* coords);
+    char getValue(int x, int y);
+
+    // Returns side lengths
+    int getHeight();
+    int getLength();
 
     // Locate the first occurence of a specific char in a Map
     // Returns a coord of -1, -1 if the char doesnt exist

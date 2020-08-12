@@ -12,6 +12,18 @@ char Map::getValue(Coords* coords) {
     return grid.at(coords->y).at(coords->x);
 }
 
+char Map::getValue(int x, int y) {
+    return grid.at(y).at(x);
+}
+
+int Map::getHeight() {
+    return grid.size();
+}
+
+int Map::getLength() {
+    return grid.front().size();
+}
+
 void Map::setValue(Coords* coords, char value) {
     grid.at(coords->y).at(coords->x) = value;
 }

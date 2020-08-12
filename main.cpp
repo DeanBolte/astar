@@ -17,7 +17,9 @@ int main() {
     printMap(map);
 
     // solve map with euclidean
-    pathfind(map);
+    std::cout << "Pathfinding..." << std::endl;
+    std::cout << pathfind(map) << std::endl;
+    std::cout << "Pathfinding complete" << std::endl;
 
     // print map
     std::cout << std::endl << "Map after pathfind():" << std::endl;
