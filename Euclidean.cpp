@@ -33,6 +33,9 @@ bool path(Map* map, Coords* start, Coords* end) {
     addCoordsToStack(start->x - 1, start->y, map, &stack);
     addCoordsToStack(start->x, start->y + 1, map, &stack);
     addCoordsToStack(start->x + 1, start->y, map, &stack);
+
+    // Sort stack
+    sort(&stack, end, 0, stack.size() - 1);
     
     // Recursively pathfind from next closest node
     while(!stack.empty()) {
@@ -52,4 +55,31 @@ void addCoordsToStack(int x, int y, Map* map, std::vector<Coords*>* stack) {
             stack->push_back(new Coords(x, y));
         }
     }
+}
+
+void sort(std::vector<Coords*>* stack, Coords* endCoords, int start, int end) {
+    if(start >= end) {
+        return;
+    }
+
+    float pivot = distance(stack->at(end), endCoords);
+
+    int pivotIndex = start;
+
+    for(int i = start; i < end; ++i) {
+        if(distance(stack->at(i), endCoords) >= pivot) {
+            // swap coords at i with coords at pivot index
+            Coords* temp = stack->at(i);
+            stack->at(i) = stack->at(pivotIndex);
+            stack->at(pivotIndex) = temp;
+            ++pivotIndex;
+        }
+    }
+    // swap coords at end with coords at pivot index
+    Coords* temp = stack->at(end);
+    stack->at(end) = stack->at(pivotIndex);
+    stack->at(pivotIndex) = temp;
+    
+    sort(stack, endCoords, start, pivotIndex - 1);
+    sort(stack, endCoords, pivotIndex + 1, end);    
 }

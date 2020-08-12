@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <chrono>
 #include "Map.h"
 #include "Euclidean.h"
 
@@ -11,19 +12,21 @@ void printMap(Map* map);
 
 int main() {
     // Read in Map from file
-    Map* map = readMap("test/4x4-01.map");
+    Map* map = readMap("test/100x100-01.map");
     // Print map after reading in
     std::cout << "Map from file:" << std::endl;
     printMap(map);
 
     // solve map with euclidean
-    std::cout << "Pathfinding..." << std::endl;
-    std::cout << pathfind(map) << std::endl;
-    std::cout << "Pathfinding complete" << std::endl;
+    auto start = std::chrono::steady_clock::now();
+    pathfind(map);
+    auto end = std::chrono::steady_clock::now();
+    auto diff = end - start;
 
     // print map
     std::cout << std::endl << "Map after pathfind():" << std::endl;
     printMap(map);
+    std::cout << "Time Taken: " << std::chrono::duration_cast<std::chrono::nanoseconds>(diff).count() << " ns" << std::endl;
 }
 
 Map* readMap(const char* fileName) {
