@@ -9,38 +9,53 @@
 
 Map* readMap(const char* fileName);
 void printMap(Map* map);
+void printMapToFile(Map* map, const char* fileName);
 
-int main() {
-    // Read in Map from file
-    Map* map = readMap("test/100x100-01.map");
-    // Print map after reading in
-    std::cout << "Map from file:" << std::endl;
-    printMap(map);
+int main(int argc, char** argv) {
+    // Command Line: astar <map file name> <pre/post map print>(y/n) <print to file>(file name)
+    if(argc >= 2) {
+        // Read in Map from file
+        Map* map = readMap(argv[1]);
+        
+        // If commandline pre/post map print == yes
+        if(*argv[2] == 'y') {
+            std::cout << "Map from file:" << std::endl;
+            printMap(map);
+        }
 
-    // solve map with euclidean
-    auto start = std::chrono::steady_clock::now();
-    pathfind(map);
-    auto end = std::chrono::steady_clock::now();
-    auto diff = end - start;
+        // solve map with euclidean
+        auto start = std::chrono::steady_clock::now();
+        pathfind(map);
+        auto end = std::chrono::steady_clock::now();
+        auto diff = end - start;
 
-    // print map
-    std::cout << std::endl << "Map after pathfind():" << std::endl;
-    printMap(map);
-    std::cout << "Time Taken: " << std::chrono::duration_cast<std::chrono::nanoseconds>(diff).count() << " ns" << std::endl;
+        if(*argv[2] == 'y') {
+            std::cout << std::endl << "Map after pathfind():" << std::endl;
+            printMap(map);
+        }
+        
+        std::cout << "Time Taken: " << std::chrono::duration_cast<std::chrono::nanoseconds>(diff).count() << " ns" << std::endl;
+
+        // Print to file
+        if(argc == 3) {
+            printMapToFile(map, argv[3]);
+        }
+    } else {
+        std::cout << "not enough arguments" << std::endl;
+    }
 }
 
 Map* readMap(const char* fileName) {
     // Create filestream
     std::ifstream file;
-    // Open filestream
     file.open(fileName);
 
     // Redirect filestream to stdin
-    auto cout_buf = std::cin.rdbuf(file.rdbuf());
+    auto cin_buf = std::cin.rdbuf(file.rdbuf());
 
     // Create temp map grid
     Map* map = new Map();
-    
+
     char c;
     int y = 0;
     while(!std::cin.get(c).eof()) {
@@ -51,13 +66,25 @@ Map* readMap(const char* fileName) {
             map->pushColumn(y, c);
         }
     }
-
-    std::cin.rdbuf(cout_buf);
+    
+    std::cin.rdbuf(cin_buf);
+    file.close();
     return map;
 }
 
 void printMap(Map* map) {
     std::cout << map->toString() << std::endl;
+}
+
+void printMapToFile(Map* map, const char* fileName) {
+    // create file stream
+    std::ofstream file;
+    file.open(fileName);
+
+    // Push map.toString() to file
+    file << map->toString() << std::endl;
+
+    file.close();
 }
 
 // MIT License
