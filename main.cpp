@@ -13,7 +13,7 @@ void printMapToFile(Map* map, const char* fileName);
 
 int main(int argc, char** argv) {
     // Command Line: astar <map file name> <pre/post map print>(y/n) <print to file>(file name)
-    if(argc >= 2) {
+    if(argc > 2) {
         // Read in Map from file
         Map* map = readMap(argv[1]);
         
@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
         std::cout << "Time Taken: " << std::chrono::duration_cast<std::chrono::nanoseconds>(diff).count() << " ns" << std::endl;
 
         // Print to file
-        if(argc == 3) {
+        if(argc > 3) {
             printMapToFile(map, argv[3]);
         }
     } else {
@@ -82,7 +82,7 @@ void printMapToFile(Map* map, const char* fileName) {
     file.open(fileName);
 
     // Push map.toString() to file
-    file << map->toString() << std::endl;
+    file << map->toString();
 
     file.close();
 }
