@@ -29,10 +29,10 @@ bool path(Map* map, Coords* start, Coords* end) {
     std::vector<Coords*> stack;
 
     // Add adjacent nodes to stack
-    addCoordsToStack(start->x, start->y - 1, map, &stack);
-    addCoordsToStack(start->x - 1, start->y, map, &stack);
-    addCoordsToStack(start->x, start->y + 1, map, &stack);
-    addCoordsToStack(start->x + 1, start->y, map, &stack);
+    addCoordsToStack(start->x, start->y - 1, map, stack);
+    addCoordsToStack(start->x - 1, start->y, map, stack);
+    addCoordsToStack(start->x, start->y + 1, map, stack);
+    addCoordsToStack(start->x + 1, start->y, map, stack);
 
     // Sort stack
     sort(stack, end, 0, stack.size() - 1);
@@ -49,10 +49,10 @@ bool path(Map* map, Coords* start, Coords* end) {
     return false;
 }
 
-void addCoordsToStack(int x, int y, Map* map, std::vector<Coords*>* stack) {
+void addCoordsToStack(int x, int y, Map* map, std::vector<Coords*>& stack) {
     if(y >= 0 && x >= 0 && (y < map->getHeight()  && x < map->getLength())) {
         if(map->getValue(x, y) == '*' || map->getValue(x, y) == 'E') {
-            stack->push_back(new Coords(x, y));
+            stack.push_back(new Coords(x, y));
         }
     }
 }
