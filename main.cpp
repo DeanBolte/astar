@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
         auto diff = end - start;
 
         if(*argv[2] == 'y') {
-            std::cout << std::endl << "Map after pathfind():" << std::endl;
+            std::cout << "Map after pathfind():" << std::endl;
             printMap(map);
         }
         

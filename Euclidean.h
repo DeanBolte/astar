@@ -18,4 +18,4 @@ bool path(Map* map, Coords* start, Coords* end);
 void addCoordsToStack(int x, int y, Map* map, std::vector<Coords*>* stack);
 
 // Sort stack by distance to the end
-void sort(std::vector<Coords*>* stack, Coords* endCoords, int start, int end);
+void sort(std::vector<Coords*>& stack, Coords* endCoords, int start, int end);
