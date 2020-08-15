@@ -3,7 +3,7 @@
 #define MAPSTART 'S'
 #define MAPEND 'E'
 #define MAPEMPTY '*'
-#define MAPWALL '/'
+#define MAPWALL '='
 #define MAPEXPLORED '-'
 #define MAPPATH 'X'
 
