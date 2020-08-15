@@ -37,8 +37,8 @@ int main(int argc, char** argv) {
 
         printMapToFile(map, "output.txt");
     } else {
-        std::cout << "No input, example size 16 Map:" << std::endl;
-        Map* map = generateMapRandomly(16);
+        std::cout << "!No input!" << std::endl;
+        Map* map = generateMapRandomly(48, 20);
         pathfind(map);
         printMap(map);
     }
