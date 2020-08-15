@@ -6,7 +6,7 @@ static Map* map;
 
 static void addCoordsToStack(int x, int y, std::vector<Coords*>& stack) {
     if(y >= 0 && x >= 0 && (y < map->getHeight()  && x < map->getLength())) {
-        if(map->getValue(x, y) == '*' || map->getValue(x, y) == 'E') {
+        if(map->getValue(x, y) == MAPEMPTY || map->getValue(x, y) == MAPEND) {
             stack.push_back(new Coords(x, y));
         }
     }
@@ -46,7 +46,7 @@ static bool path(Coords* start, Coords* end) {
     }
 
     // identifier for past nodes
-    map->setValue(start, '-');
+    map->setValue(start, MAPEXPLORED);
 
     // Stack of Nodes
     std::vector<Coords*> stack;
@@ -64,7 +64,7 @@ static bool path(Coords* start, Coords* end) {
     while(!stack.empty()) {
         Coords* next = stack.back();
         if(path(next, end)) {
-            map->setValue(start, 'X');
+            map->setValue(start, MAPPATH);
             return true;
         }
         stack.pop_back();

@@ -1,5 +1,12 @@
 #pragma once
 
+#define MAPSTART 'S'
+#define MAPEND 'E'
+#define MAPEMPTY '*'
+#define MAPWALL '/'
+#define MAPEXPLORED '-'
+#define MAPPATH 'X'
+
 #include <vector>
 #include <string>
 
