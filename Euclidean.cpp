@@ -5,7 +5,7 @@
 static Map* map;
 
 static void addCoordsToStack(int x, int y, std::vector<Coords*>& stack) {
-    if(y >= 0 && x >= 0 && (y < map->getHeight()  && x < map->getLength())) {
+    if(y >= 0 && x >= 0 && (y < map->height()  && x < map->length())) {
         if(map->getValue(x, y) == MAPEMPTY || map->getValue(x, y) == MAPEND) {
             stack.push_back(new Coords(x, y));
         }

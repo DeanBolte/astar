@@ -16,11 +16,11 @@ char Map::getValue(int x, int y) {
     return grid.at(y).at(x);
 }
 
-int Map::getHeight() {
+int Map::height() {
     return grid.size();
 }
 
-int Map::getLength() {
+int Map::length() {
     return grid.front().size();
 }
 
