@@ -6,21 +6,23 @@
 #include <chrono>
 #include "Map.h"
 #include "Euclidean.h"
+#include "MapGenerator.h"
 
 Map* readMap(const char* fileName);
 void printMap(Map* map);
 void printMapToFile(Map* map, const char* fileName);
 
 int main(int argc, char** argv) {
-    // Command Line: astar <map file name> <pre/post map print>(y/n) <print to file>(file name)
-    if(argc > 2) {
-        // Read in Map from file
-        Map* map = readMap(argv[1]);
-        
-        // If commandline pre/post map print == yes
-        if(*argv[2] == 'y') {
-            std::cout << "Map from file:" << std::endl;
-            printMap(map);
+    if(argc > 1) {
+        Map* map = nullptr;
+        if(std::string(argv[1]) == "-filein") {
+            // Read in Map from file
+            map = readMap(argv[2]);
+        } else if(std::string(argv[1]) == "-random") {
+            map = generateMapRandomly(std::atoi(argv[2]));
+        } else {
+            std::cout << "No valid input, example size 16 Map:" << std::endl;
+            map = generateMapRandomly(16);
         }
 
         // solve map with euclidean
@@ -29,20 +31,19 @@ int main(int argc, char** argv) {
         auto end = std::chrono::steady_clock::now();
         auto diff = end - start;
 
-        if(*argv[2] == 'y') {
-            std::cout << std::endl << "Map after pathfind():" << std::endl;
-            printMap(map);
-        }
-        
+        printMap(map);
+
         std::cout << "Time Taken: " << std::chrono::duration_cast<std::chrono::nanoseconds>(diff).count() << " ns" << std::endl;
 
-        // Print to file
-        if(argc > 3) {
-            printMapToFile(map, argv[3]);
-        }
+        printMapToFile(map, "output.txt");
     } else {
-        std::cout << "not enough arguments" << std::endl;
+        std::cout << "!No input!" << std::endl;
+        Map* map = generateMapRandomly(48, 20);
+        pathfind(map);
+        printMap(map);
     }
+
+    
 }
 
 Map* readMap(const char* fileName) {

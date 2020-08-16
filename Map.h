@@ -1,5 +1,12 @@
 #pragma once
 
+#define MAPSTART 'S'
+#define MAPEND 'E'
+#define MAPEMPTY '*'
+#define MAPWALL '='
+#define MAPEXPLORED '-'
+#define MAPPATH 'X'
+
 #include <vector>
 #include <string>
 
@@ -28,8 +35,8 @@ public:
     char getValue(int x, int y);
 
     // Returns side lengths
-    int getHeight();
-    int getLength();
+    int height();
+    int length();
 
     // Locate the first occurence of a specific char in a Map
     // Returns a coord of -1, -1 if the char doesnt exist
